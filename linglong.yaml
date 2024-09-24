@@ -1,0 +1,27 @@
+version: "1"
+
+package:
+  id: io.github.ColorExtractor
+  name: ColorExtractor
+  version: 0.2.0.1
+  kind: app
+  description: |
+    Color extractor that can be used to extract or remove a certain color from an image. An error tolerance may also be set. 
+
+command:
+  - /opt/apps/io.github./files/bin/ColorExtractor
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/wjyrich/ColorExtractor.git
+    version: master
+    commit: c5ecbe96c120aee9657b2f477d2a428c35bf1e8d
+
+build: |
+  cd /project/linglong/sources/ColorExtractor.git
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
